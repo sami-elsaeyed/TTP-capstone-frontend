@@ -1,19 +1,18 @@
-import { applyMiddleware, createStore } from 'redux';
-import axios from 'axios';
-import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
+
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-// Individual reducers altogether under an alias;
+import axios from 'axios';
 import rootReducer from './reducers/index';
+import loggingMiddleware from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 
-
-// Construct our Redux store;
-const logger = createLogger({ collapsed: true });
-const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware.withExtraArgument({ axios }), logger)
+export default createStore(
+  rootReducer,
+  composeWithDevTools(
+    applyMiddleware(
+      thunkMiddleware.withExtraArgument({ axios }),
+      loggingMiddleware
+    )
+  )
 );
-const store = createStore(rootReducer, middleware);
 
-// Export our store by default, which will be provided to and injected within our entire application;
-export default store;
