@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUserPrefs } from '../redux/reducers';
+import { getUserPrefs, loggingIn } from '../redux/reducers';
 
 class Homepage extends Component{
     async componentDidMount(){

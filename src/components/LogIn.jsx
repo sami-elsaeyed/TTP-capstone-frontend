@@ -1,4 +1,6 @@
 import { Component } from "react"
+import { connect } from 'react-redux';
+import { loggingIn } from '../redux/reducers';
 
 class Login extends Component{
     constructor(props){
@@ -18,9 +20,11 @@ class Login extends Component{
             password:event.target.value
         })
     }
-    onSubmit=(event)=>{
+    onSubmit= async (event) => {
         event.preventDefault();
         console.log(this.state)
+        await this.props.loggingIn(); // Log in redux call.
+        // Redirect to homepage with pref props??
     }
     render(){
         return <div style= {{marginTop: 100, marginLeft:300, marginRight:570}}>
@@ -38,4 +42,19 @@ class Login extends Component{
     }
 
 }
-export default Login
+
+const mapStateToProp = (state) => {
+    console.log('MAPPING STATE TO PROPS');
+    return { 
+        user: state.user 
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    console.log('MAPPING DISPATCH TO PROPS');
+    return { 
+        loggingIn: () => dispatch(loggingIn())
+    };
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(Login);
