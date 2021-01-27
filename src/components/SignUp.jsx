@@ -1,55 +1,46 @@
 import { Component } from "react";
-import { Route } from "react-router-dom";
+import { connect } from 'react-redux';
+import { createAccount } from "../redux/reducers/index";
 
 class SignUp extends Component{
     constructor(props){
         super(props)
         this.state={
+            
             username:"",
             email:"",
             password:"",
             repassword:""
+            
 
         }
     }
-    handleUser=(event)=>{
+    handleChange=(event)=>{
         this.setState({
-            username:event.target.value
-        })
-    }
-    handlePass=(event)=>{
-        this.setState({
-            password:event.target.value
-        })
-    }
-    handleRepass=(event)=>{
-        this.setState({
-            repassword:event.target.value
-        })
-    }
-    handleEmail=(event)=>{
-        this.setState({
-            email:event.target.value
+           [event.target.name]:event.target.value
         })
     }
     onSubmit=(event)=>{
         event.preventDefault();
+        console.log(this.state)
+        console.log(this.props.users)
+        this.props.createAccount(this.state.user)
         
     }
     render(){
         return <div style= {{marginTop: 100, marginLeft:300, marginRight:500}}>
             <form onSubmit={this.onSubmit}>
                 <label > Username: </label>
-                <input type="text" onChange={this.handleUser} style={{float:'right'}}/>
+                <input type="text" name="username" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
                 <label >Password: </label>
-                <input type="password" onChange={this.handlePass} style={{float:'right'}}/>
+                <input type="password" name="password" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
                 <label >Re-Enter Password: </label>
-                <input type="password" onChange={this.handleRepass} style={{float:'right'}}/>
+                <input type="password" name="repassword" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/> 
                 <label >Email: </label>
-                <input type="text" onChange={this.handleEmail} style={{float:'right'}} />
+                <input type="text" name="email" onChange={this.handleChange} style={{float:'right'}} />
                 <br/>
                 <br/>
                 <input type="submit" value="Create Account" className="btn btn-primary" style={{margin:'auto'}}/>
@@ -58,6 +49,20 @@ class SignUp extends Component{
     }
 
 }
+const mapStateToProps = (state) => {
+    console.log('state', state);
+    return {
+      users: state
+    };
+  };
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+      createAccount: (user) => {
+        dispatch(createAccount(user));
+      }
+    };
+  };
 
+  export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
 
-export default SignUp

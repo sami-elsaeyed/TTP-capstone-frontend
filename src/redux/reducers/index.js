@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { GOT_USER_PREFS, LOG_IN } from './actions';
+
+import { GOT_USER_PREFS, LOG_IN, CREATE_ACCOUNT } from './actions';
 
 const initState = {
     user: "",
@@ -43,6 +44,20 @@ export const loggingIn = () => {
         }catch (error) { console.log(error) };
     }
 }
+export const createAccount =(data)=>({
+    type: CREATE_ACCOUNT,
+    data: data
+})
+export const createAccountThunk =(data)=>{
+    console.log("Signing you up")
+    return async (dispatch) => {
+        return axios.post('', data)
+          .then(res => res.data)
+          .then(json => {
+            dispatch({ createAccount, data })
+          })
+      }
+    }
 
 const rootReducer = (state = initState, action) => {
     console.log("REDUCER IS PROCESSING DISPATCHED ACTION");
@@ -53,6 +68,8 @@ const rootReducer = (state = initState, action) => {
         return { ...state, user: action.payload };
     case LOG_IN:
         return { ...state, user: action.payload };
+    case CREATE_ACCOUNT:
+            return{...state, allAccounts:[...state.allAccounts, action.data]}    
       default:
         return state;
     }
