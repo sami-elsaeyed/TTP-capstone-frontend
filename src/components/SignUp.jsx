@@ -1,18 +1,16 @@
 import { Component } from "react";
 import { connect } from 'react-redux';
-import { createAccount } from "../redux/reducers/index";
+import { createAccountThunk } from "../redux/reducers/index";
 
 class SignUp extends Component{
     constructor(props){
         super(props)
         this.state={
-            
-            username:"",
+            firstName:"",
             email:"",
             password:"",
             repassword:""
             
-
         }
     }
     handleChange=(event)=>{
@@ -24,14 +22,14 @@ class SignUp extends Component{
         event.preventDefault();
         console.log(this.state)
         console.log(this.props.users)
-        this.props.createAccount(this.state.user)
+        this.props.createAccount(this.state)
         
     }
     render(){
         return <div style= {{marginTop: 100, marginLeft:300, marginRight:500}}>
             <form onSubmit={this.onSubmit}>
                 <label > Username: </label>
-                <input type="text" name="username" onChange={this.handleChange} style={{float:'right'}}/>
+                <input type="text" name="firstName" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
                 <label >Password: </label>
                 <input type="password" name="password" onChange={this.handleChange} style={{float:'right'}}/>
@@ -59,7 +57,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       createAccount: (user) => {
-        dispatch(createAccount(user));
+        dispatch(createAccountThunk(user));
       }
     };
   };
