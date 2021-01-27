@@ -1,0 +1,1 @@
+export const GOT_USER_PREFS = "GOT_USER_PREFS"

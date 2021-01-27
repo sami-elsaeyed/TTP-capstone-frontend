@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 //Component
 import LogIn from "./components/LogIn";
-import SignUp from "./components/SignUp"
+import SignUp from "./components/SignUp";
+import Homepage from "./components/Homepage";
 
 class App extends Component {
   render(){
@@ -31,6 +32,7 @@ class App extends Component {
           </nav>
           <Route exact path ="/" component={LogIn}/>
           <Route exact path ="/signUp" component={SignUp}/>
+          <Route exact path ="/homepage" component={Homepage}/>
           {/*Route exact path ="/campuses/:id" component={CampusCard}/>
           <Route exact path ="/students/:id" component={StudentCard}/> */}
         </div>
