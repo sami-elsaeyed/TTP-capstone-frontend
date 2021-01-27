@@ -1,13 +1,13 @@
 import { Component } from "react"
-import axios from 'axios';
+import { connect } from 'react-redux'
+import { logoutThunk } from "../redux/reducers";
 
-export default class Login extends Component {
+class Logout extends Component {
 
     async componentDidMount() {
-        axios.delete('http://localhost:8080/auth/logout').then(data => {
-            console.log("Test");
-            console.log(data);
-        })
+        
+        this.props.logOut()
+        
     }
 
     render(){
@@ -19,3 +19,11 @@ export default class Login extends Component {
     }
 
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logOut: () => dispatch(logoutThunk())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Logout)
