@@ -6,21 +6,18 @@ class Login extends Component{
     constructor(props){
         super(props)
         this.state={
-            username:"",
-            password:""
+            username: "",
+            password: ""
         }
     }
-    handleUser=(event)=>{
+    
+    handleChange = (event) => {
         this.setState({
-            username:event.target.value
+            [event.target.name]: event.target.value
         })
     }
-    handlePass=(event)=>{
-        this.setState({
-            password:event.target.value
-        })
-    }
-    onSubmit= async (event) => {
+
+    onSubmit = async (event) => {
         event.preventDefault();
         console.log(this.state)
         await this.props.loggingIn(); // Log in redux call.
@@ -30,10 +27,10 @@ class Login extends Component{
         return <div style= {{marginTop: 100, marginLeft:300, marginRight:570}}>
             <form onSubmit={this.onSubmit}>
                 <label > Username: </label>
-                <input type="text" onChange={this.handleUser} style={{float:'right'}}/>
+                <input type="text" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
                 <label >Password: </label>
-                <input type="password" onChange={this.handlePass} style={{float:'right'}}/>
+                <input type="password" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
                 <br/>
                 <input type="submit" value="Log In" className="btn btn-primary" />
@@ -46,8 +43,9 @@ class Login extends Component{
 const mapStateToProp = (state) => {
     console.log('MAPPING STATE TO PROPS');
     return { 
-        user: state.user 
-    };
+        username: state.username,
+        password: state.password, 
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

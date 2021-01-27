@@ -3,6 +3,8 @@ import { GOT_USER_PREFS, LOG_IN } from './actions';
 
 const initState = {
     user: "",
+    userName: "",
+    password: "",
 }
 
 const gotUserPrefs = (payload) => ({
@@ -15,7 +17,8 @@ export const getUserPrefs = () => {
     return async (dispatch) => {
         try {
             console.log("We are getting user prefs now.");
-            const user = await axios.get('http://localhost:8080/auth/me')
+            axios.defaults.withCredentials = true;
+            const user = await axios.get("http://localhost:8080/auth/me").
             console.log(user);
             dispatch(gotUserPrefs(user));
         }catch (error) { console.log(error) };
