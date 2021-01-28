@@ -6,7 +6,11 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 //Component
 import LogIn from "./components/LogIn";
-import SignUp from "./components/SignUp"
+import SignUp from "./components/SignUp";
+import Homepage from "./components/Homepage";
+import Me from "./components/Me";
+import LogOut from "./components/LogOut";
+import Todo from "./components/Todo/todo"
 
 class App extends Component {
   render(){
@@ -23,16 +27,18 @@ class App extends Component {
                 <li>
                   <Link to="/" className="nav-link">Log In</Link>
                 </li>
-                {/* <li>
-                  <Link to="/c" className="nav-link">Add Campus</Link>
-                </li> */}
+                <li>
+                  <Link to="/logOut" className="nav-link">Log Out</Link>
+                </li>
               </ul>
             </div>
           </nav>
           <Route exact path ="/" component={LogIn}/>
           <Route exact path ="/signUp" component={SignUp}/>
-          {/*Route exact path ="/campuses/:id" component={CampusCard}/>
-          <Route exact path ="/students/:id" component={StudentCard}/> */}
+          <Route exact path ="/homepage" component={Homepage}/>
+          <Route exact path ="/me" component={Me}/>
+          <Route exact path ="/logOut" component={LogOut}/>
+          <Route exact path ="/Todo" component={Todo}/>
         </div>
         </Router>
     )
