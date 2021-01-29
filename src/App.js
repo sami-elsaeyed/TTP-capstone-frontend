@@ -10,6 +10,7 @@ import SignUp from "./components/SignUp";
 import Homepage from "./components/Homepage";
 import Me from "./components/Me";
 import LogOut from "./components/LogOut";
+import Todo from './components/todo/todo'
 
 class App extends Component {
   render(){
@@ -29,6 +30,10 @@ class App extends Component {
                 <li>
                   <Link to="/logOut" className="nav-link">Log Out</Link>
                 </li>
+                {/*should not be in its own page, just added the route for testing that it works */}
+                <li>
+                  <Link to="/Todo" className="nav-link">todo</Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -37,8 +42,8 @@ class App extends Component {
           <Route exact path ="/homepage" component={Homepage}/>
           <Route exact path ="/me" component={Me}/>
           <Route exact path ="/logOut" component={LogOut}/>
-          {/*Route exact path ="/campuses/:id" component={CampusCard}/>
-          <Route exact path ="/students/:id" component={StudentCard}/> */}
+          {/*should not be in its own page, just added the route for testing that it works */}
+          <Route exact path ="/Todo" component={Todo}/>
         </div>
         </Router>
     )
