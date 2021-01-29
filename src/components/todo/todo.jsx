@@ -62,12 +62,14 @@ class Todo extends Component{
         return <div>
             <h4>Todo List</h4>
             <div>
+                {this.props.allTodo && this.props.allTodo.length !== 0 ?
                 <div >
                     {this.props.allTodo.map((todotask, index) => {
                         return <TodoItem task = {todotask} key = {index} />
-                    })}
-                    
-                </div>
+                    })} 
+                </div> :
+                <h4>No tasks available</h4>
+                }
             </div>
             <div>
                 <button onClick={this.handleNew}>Add Todo Item</button>
