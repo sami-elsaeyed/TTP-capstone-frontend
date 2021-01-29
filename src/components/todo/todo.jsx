@@ -16,12 +16,10 @@ class Todo extends Component{
         }
     }
     componentDidMount(){
-        console.log('original state', this.state)
-        console.log('mounted todo')
         this.props.getTodoItems(this.props.user.tasks)
     }
+
     handleNew=()=>{
-        console.log(this.props.user.id)
         this.setState(prevState => {
             return {addNew:true,
             item: {
@@ -41,10 +39,8 @@ class Todo extends Component{
             }
             }
         })
-        console.log('editing state', this.state)
     }
     onSubmit=()=>{
-        console.log('submitted state', this.state)
         this.props.addTodoItem(this.state.item)
         this.setState({
             addNew:false
@@ -55,12 +51,8 @@ class Todo extends Component{
          return(
             <div style= {{marginTop: 100, marginLeft:300, marginRight:570}}>
             <form onSubmit={this.onSubmit}>
-                <label > Title: </label>
+                <label > Task: </label>
                 <input type="text" name="task" onChange={this.handleChange} style={{float:'right'}}/>
-                <br/>
-                <label >Description: </label>
-                <input type="textarea" name="newDescription" onChange={this.handleChange} style={{float:'right'}}/>
-                <br/>
                 <br/>
                 <input type="submit" value="Create Item" className="btn btn-primary" />
             </form>
@@ -76,7 +68,6 @@ class Todo extends Component{
                     })}
                     
                 </div>
-
             </div>
             <div>
                 <button onClick={this.handleNew}>Add Todo Item</button>
