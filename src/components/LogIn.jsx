@@ -6,7 +6,7 @@ class Login extends Component{
     constructor(props){
         super(props)
         this.state={
-            username: "",
+            email: "",
             password: ""
         }
     }
@@ -26,11 +26,11 @@ class Login extends Component{
     render(){
         return <div style= {{marginTop: 100, marginLeft:300, marginRight:570}}>
             <form onSubmit={this.onSubmit}>
-                <label > Username: </label>
-                <input type="text" onChange={this.handleChange} style={{float:'right'}}/>
+                <label > Email: </label>
+                <input name = 'email' type="email" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
                 <label >Password: </label>
-                <input type="password" onChange={this.handleChange} style={{float:'right'}}/>
+                <input name = 'password' type="password" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
                 <br/>
                 <input type="submit" value="Log In" className="btn btn-primary" />
@@ -40,13 +40,13 @@ class Login extends Component{
 
 }
 
-const mapStateToProp = (state) => {
-    console.log('MAPPING STATE TO PROPS');
-    return { 
-        username: state.username,
-        password: state.password, 
-    }
-};
+// const mapStateToProp = (state) => {
+//     console.log('MAPPING STATE TO PROPS');
+//     return { 
+//         username: state.username,
+//         password: state.password, 
+//     }
+// };
 
 const mapDispatchToProps = (dispatch) => {
     console.log('MAPPING DISPATCH TO PROPS');
@@ -55,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProp, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

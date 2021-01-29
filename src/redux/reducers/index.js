@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-import { GOT_USER_PREFS, LOG_IN, CREATE_ACCOUNT, LOG_OUT } from './actions';
+import { GOT_USER_PREFS, LOG_IN, CREATE_ACCOUNT, LOG_OUT, GET_TODO_ITEMS, ADD_TODO_ITEM, DELETE_TODO_ITEM } from './actions';
 
 const initState = {
     user: "",
+    Todo: []
 }
 
 const gotUserPrefs = (payload) => ({
@@ -33,12 +34,12 @@ export const loggingIn = () => {
     return async (dispatch) => {
         try {  
             //login with dummy data
-            const data = await axios.post('http://localhost:8080/auth/login', {
+            const user = await axios.post('http://localhost:8080/auth/login', {
                 "email": "test@gmail.com",
-                "password": "testpassword"
+                "password": "test"
             }, {withCredentials: true});
-            console.log(data);
-            dispatch(logIn(data));
+            console.log(user);
+            dispatch(logIn(user.data));
         }catch (error) { console.log(error) };
     }
 }
@@ -72,21 +73,84 @@ export const createAccountThunk =(data)=>{
         })
     }
 
+    export const getTodoItems = (payload)=>({
+        type: GET_TODO_ITEMS,
+        payload,
+    })    
+    export const getTodoItemsThunk=()=>{
+        return async (dispatch) => {
+            try {
+                console.log("We are getting todo items now.");
+                const items = await axios.get("")
+                console.log(items.data);
+                dispatch(getTodoItems(items.data));
+            }catch (error) { console.log(error) };
+        };
+    };
+
+    export const addTodoItem =(payload)=>({
+        type: ADD_TODO_ITEM,
+        payload,
+    })
+    export const addTodoItemThunk =(data)=>{
+        console.log("Adding Item")
+        console.log(data)
+        return (dispatch) => {
+            return axios.post('http://localhost:8080/api/tasks', data)
+              .then(res => {
+                console.log('data', res.data)  
+                return dispatch(addTodoItem(res.data) )})
+          }
+    }
+
+    export const deleteTask =(payload)=>({
+        type: DELETE_TODO_ITEM,
+        payload,
+    })
+    export const deleteTaskThunk=(id)=>{
+        return (dispatch) => {
+            return axios.delete(`http://localhost:8080/api/tasks/${id}`)
+              .then(() => {
+                dispatch( deleteTask (id))
+              })
+          };
+        }    
+
 const rootReducer = (state = initState, action) => {
     console.log("REDUCER IS PROCESSING DISPATCHED ACTION");
     console.log('state', state);
     console.log('action', action);
     switch (action.type) {
       case GOT_USER_PREFS:
-        return { ...state, user: action.payload };
-    case LOG_IN:
-        return { ...state, user: action.payload };
-    case CREATE_ACCOUNT:
-            return{...state, user: action.payload} ;
-    case LOG_OUT: 
-        return {...state, user: action.payload}
-    default:
-        return state;
+        return { ...state, 
+            user: action.payload 
+             };
+        case LOG_IN:
+            return { ...state, 
+                user: action.payload
+             };
+        case CREATE_ACCOUNT:
+            return{...state, 
+                user: action.payload
+            } ;
+        case LOG_OUT: 
+            return {...state, 
+                user: action.payload
+            };
+        case GET_TODO_ITEMS:
+            return {...state, 
+                Todo: action.payload
+            } 
+        case ADD_TODO_ITEM:
+            return {...state, 
+                Todo:[...state.Todo, action.payload]
+            }    
+        case DELETE_TODO_ITEM:
+            return {...state, 
+                Todo: state.Todo.filter(task => task.id != action.payload)
+            }  
+        default:
+            return state;
     }
 }
 
