@@ -9,20 +9,33 @@ class SignUp extends Component{
             firstName:"",
             email:"",
             password:"",
-            repassword:""
-            
+            repassword:"",
+            clock:true,
+            toDo:true,
+            weather:false,
+            news:false
         }
     }
     handleChange=(event)=>{
+      console.log(event.target)
+      console.log(event.target.checked)
+      console.log(event.target.value)
+      if (event.target.type === 'checkbox') {
+        this.setState({
+          [event.target.name]:event.target.checked
+       })
+      }
+      else{
         this.setState({
            [event.target.name]:event.target.value
         })
+      }
     }
     onSubmit=(event)=>{
-        event.preventDefault();
-        console.log(this.state)
-        console.log(this.props.users)
-        this.props.createAccount(this.state)
+      event.preventDefault();
+      console.log(this.state)
+      console.log(this.props.users)
+      this.props.createAccount(this.state)
         
     }
     render(){
@@ -39,9 +52,22 @@ class SignUp extends Component{
                 <br/> 
                 <label >Email: </label>
                 <input type="text" name="email" onChange={this.handleChange} style={{float:'right'}} />
-                <br/>
-                <br/>
-                <input type="submit" value="Create Account" className="btn btn-primary" style={{margin:'auto'}}/>
+                <br/> 
+                <label>Set user Preferences</label>
+                <br />
+                <label >Clock</label>
+                <input type = 'checkbox' name="clock" onChange={this.handleChange} />
+                <br/> 
+                <label >To Do List </label>
+                <input type = 'checkbox' name="todo" onChange={this.handleChange} />
+                <br/> 
+                <label >Weather </label>
+                <input type = 'checkbox' name="weather" onChange={this.handleChange} />
+                <br/> 
+                <label >News </label>
+                <input type = 'checkbox' name="news" onChange={this.handleChange} />
+                <br/> 
+                <input type="submit" value="Create Account" className="btn btn-primary" />
             </form>
         </div>
     }
