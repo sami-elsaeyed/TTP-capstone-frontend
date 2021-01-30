@@ -24,7 +24,9 @@ class Login extends Component{
         // Redirect to homepage with pref props??
     }
     render(){
-        return <div style= {{marginTop: 100, marginLeft:300, marginRight:570}}>
+        return <div>
+        <div style= {{marginTop: 100, width:350}} className="jumbotron container">
+            <p style={{fontSize:20, fontFamily:"Sans-serif"}}>Login and get to your Widgets</p>
             <form onSubmit={this.onSubmit}>
                 <label > Email: </label>
                 <input name = 'email' type="email" onChange={this.handleChange} style={{float:'right'}}/>
@@ -32,8 +34,10 @@ class Login extends Component{
                 <label >Password: </label>
                 <input name = 'password' type="password" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
+                <div style={{textAlign:"center"}}>        
+                  <input type="submit" value="Log In" className="btn btn-primary" />
+                </div> 
                 <br/>
-                <input type="submit" value="Log In" className="btn btn-primary" />
             </form>
             {this.props.error === 'Wrong email/password' ? 
                 <p>Wrong email/password</p> :

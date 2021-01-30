@@ -10,11 +10,10 @@ class TodoItem extends Component{
 
     render(){
         return(
-            <div>
+            <div className="">
                 <h5 maxLength="10" onChange={this.handleChange} style={{display: "inline-block"}}>{this.props.task.task}</h5>
-                <button onClick = {this.deleteTask} value = {this.props.task.id}>Remove Task</button>
-            </div>
-            
+                <button className="btn btn-primary" onClick = {this.deleteTask} value = {this.props.task.id}>Remove Task</button>
+            </div> 
         )
     }
 }

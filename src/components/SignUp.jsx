@@ -39,41 +39,48 @@ class SignUp extends Component{
         
     }
     render(){
-        return <div style= {{marginTop: 100, marginLeft:300, marginRight:500}}>
+        return <div>
+            <div style= {{marginTop: 100, width:390}} className="jumbotron container">
+            <p style={{fontSize:22, fontFamily:"Sans-serif"}}>Create an account to get started!</p>
             <form onSubmit={this.onSubmit}>
-                <label > Username: </label>
-                <input type="text" name="firstName" onChange={this.handleChange} style={{float:'right'}}/>
+                <label > First Name: </label>
+                <input type="text" name="firstName" onChange={this.handleChange} style={{float:"right"}}/>
                 <br/>
                 <label >Password: </label>
-                <input type="password" name="password" onChange={this.handleChange} style={{float:'right'}}/>
+                <input type="password" name="password" onChange={this.handleChange} style={{float:"right"}}/>
                 <br/>
                 <label >Re-Enter Password: </label>
-                <input type="password" name="repassword" onChange={this.handleChange} style={{float:'right'}}/>
+                <input type="password" name="repassword" onChange={this.handleChange} style={{float:"right"}}/>
                 <br/> 
                 <label >Email: </label>
-                <input type="text" name="email" onChange={this.handleChange} style={{float:'right'}} />
+                <input type="text" name="email" onChange={this.handleChange} style={{float:"right"}} />
                 <br/> 
-                <label>Set user Preferences</label>
+                <br/>
+                <label style={{fontSize:22, fontFamily:"Sans-serif"}}>Set user Preferences</label>
                 <br />
-                <label >Clock</label>
+                <label style={{paddingRight:5}} >Clock</label>
                 <input type = 'checkbox' name="clock" onChange={this.handleChange} checked/>
-                <br/> 
-                <label >To Do List </label>
+                {/* <br/>  */}
+                <label style={{paddingLeft:15, paddingRight:5}}>To Do List </label>
                 <input type = 'checkbox' name="todo" onChange={this.handleChange} checked/>
-                <br/> 
-                <label >Weather </label>
+                {/* <br/>  */}
+                <label style={{paddingLeft:15, paddingRight:5}}>Weather </label>
                 <input type = 'checkbox' name="weather" onChange={this.handleChange} />
-                <br/> 
-                <label >News </label>
+                {/* <br/>  */}
+                <label style={{paddingLeft:15, paddingRight:5}} >News </label>
                 <input type = 'checkbox' name="news" onChange={this.handleChange} />
                 <br/> 
-                <input type="submit" value="Create Account" className="btn btn-primary" />
+                <br/> 
+                <div style={{textAlign:"center"}}>
+                  <input type="submit" value="Create Account" className="btn btn-primary" />
+                </div>
             </form>
             {this.props.error === 'Email is already in use' ? 
                 <p>Email is already in use</p> :
                 null
             }
         </div>
+    </div>
     }
 
 }

@@ -49,32 +49,37 @@ class Todo extends Component{
     render(){
          if(this.state.addNew){
          return(
-            <div style= {{marginTop: 100, marginLeft:300, marginRight:570}}>
+
+            <div style= {{marginTop: 100, marginLeft:300, width:500}} className="jumbotron container">
             <form onSubmit={this.onSubmit}>
                 <label > Task: </label>
-                <input type="text" name="task" onChange={this.handleChange} style={{float:'right'}}/>
+                <input type="text" name="task" onChange={this.handleChange}/>
                 <br/>
                 <input type="submit" value="Create Item" className="btn btn-primary" />
             </form>
         </div>
          )}
          else{
-        return <div>
-            <h4>Todo List</h4>
-            <div>
+
+        return <div> <div style={{marginTop: 100, width:700 }} class="jumbotron container" >
+            <h4 style={{textAlign:"center"}}>Todo List</h4>
+            <br/>
+            <ul className="list-group">
                 {this.props.allTodo && this.props.allTodo.length !== 0 ?
-                <div >
+                <li className="list-group" >
                     {this.props.allTodo.map((todotask, index) => {
                         return <TodoItem task = {todotask} key = {index} />
                     })} 
-                </div> :
-                <h4>No tasks available</h4>
+                </li> :
+                <li className="list-group">No tasks available</li>
                 }
-            </div>
-            <div>
-                <button onClick={this.handleNew}>Add Todo Item</button>
-            </div>
+            </ul>
+            <br/>  
         </div>
+            <div style={{textAlign:"center"}}>
+                <button className="btn btn-primary" onClick={this.handleNew}>Add Todo Item</button>
+            </div>
+            </div>
          }
     }
 }
