@@ -49,9 +49,6 @@ class SignUp extends Component{
                 <label >Password: </label>
                 <input type="password" name="password" onChange={this.handleChange} style={{float:"right"}}/>
                 <br/>
-                <label >Re-Enter Password: </label>
-                <input type="password" name="repassword" onChange={this.handleChange} style={{float:"right"}}/>
-                <br/> 
                 <label >Email: </label>
                 <input type="text" name="email" onChange={this.handleChange} style={{float:"right"}} />
                 <br/> 
@@ -62,13 +59,15 @@ class SignUp extends Component{
                 <input type = 'checkbox' name="clock" onChange={this.handleChange} checked/>
                 {/* <br/>  */}
                 <label style={{paddingLeft:15, paddingRight:5}}>To Do List </label>
-                <input type = 'checkbox' name="todo" onChange={this.handleChange} checked/>
+                <input type = 'checkbox' name="toDo" onChange={this.handleChange} checked/>
                 {/* <br/>  */}
                 <label style={{paddingLeft:15, paddingRight:5}}>Weather </label>
                 <input type = 'checkbox' name="weather" onChange={this.handleChange} />
                 {/* <br/>  */}
                 <label style={{paddingLeft:15, paddingRight:5}} >News </label>
                 <input type = 'checkbox' name="news" onChange={this.handleChange} />
+                <label style={{paddingRight:5}} >Covid Stats </label>
+                <input type = 'checkbox' name="covid" onChange={this.handleChange} />
                 <br/> 
                 <br/> 
                 <div style={{textAlign:"center"}}>
@@ -76,7 +75,7 @@ class SignUp extends Component{
                 </div>
             </form>
             {this.props.error === 'Email is already in use' ? 
-                <p>Email is already in use</p> :
+                <p className='text-danger'>Email is already in use</p> :
                 null
             }
         </div>

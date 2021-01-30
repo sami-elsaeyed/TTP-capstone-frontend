@@ -40,7 +40,7 @@ class Login extends Component{
                 <br/>
             </form>
             {this.props.error === 'Wrong email/password' ? 
-                <p>Wrong email/password</p> :
+                <p className='text-danger'>Wrong email/password</p> :
                 null
             }
         </div>
