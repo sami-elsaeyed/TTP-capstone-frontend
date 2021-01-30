@@ -10,6 +10,7 @@ import { GOT_USER_PREFS,
         GOT_WEATHER,
         GOT_NEWS,
         GOT_COVID,
+        EDIT_PREFERENCES
     } from './actions';
 
 const initState = {
@@ -17,7 +18,7 @@ const initState = {
     Todo: [],
     weather: "",
     covid: "",
-    news: "",
+    news: ""
 }
 
 const gotWeather = (payload) => ({
@@ -31,7 +32,6 @@ export const getWeather = () => {
         try{
             console.log("Getting weather");
             const weather = await axios.get("http://localhost:8080/api/info/weather")
-            console.log(weather.data);
             dispatch(gotWeather(weather.data));
         }catch (error) { console.error(error) };
     };
@@ -48,7 +48,6 @@ export const getCovid = () => {
         try{
             console.log("Getting covid");
             const covid = await axios.get("http://localhost:8080/api/info/covid")
-            console.log(covid.data);
             dispatch(gotCovid(covid.data));
         }catch (error) { console.error(error) };
     };
@@ -65,11 +64,27 @@ export const getNews = () => {
         try{
             console.log("Getting news");
             const news = await axios.get("http://localhost:8080/api/info/news")
-            console.log(news.data);
             dispatch(gotNews(news.data));
         }catch (error) { console.error(error) };
     };
 };
+
+export const editPreferencesThunk = (newPrefs) => {
+    console.log("Thunking - getting user prefs now.");
+    return async (dispatch) => {
+        try {
+            console.log("We are getting user prefs now.");
+            const user = await axios.put(`http://localhost:8080/api/preferences/${newPrefs.id}`, newPrefs)
+            dispatch(editPreferences(user.data));
+        }catch (error) { console.log(error) };
+    };
+};
+
+const editPreferences = (payload) => ({
+    type: EDIT_PREFERENCES,
+    payload
+})
+
 
 const gotUserPrefs = (payload) => ({
     type: GOT_USER_PREFS,
@@ -98,7 +113,6 @@ export const loggingIn = (userInfo) => {
     return async (dispatch) => {
         try {  
             console.log(userInfo);
-            //login with dummy data
             const user = await axios.post('http://localhost:8080/auth/login', userInfo, {withCredentials: true});
             console.log(user);
             dispatch(logIn(user.data));
@@ -223,6 +237,8 @@ const rootReducer = (state = initState, action) => {
             return {...state,
                 news: action.payload
             }  
+        case EDIT_PREFERENCES:
+            return {...state} 
         default:
             return state;
     }

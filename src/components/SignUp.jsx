@@ -13,7 +13,8 @@ class SignUp extends Component{
             clock:true,
             toDo:true,
             weather:false,
-            news:false
+            news:false,
+            covid:false
         }
     }
 
