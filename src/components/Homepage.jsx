@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editPreferencesThunk, getUserPrefs } from '../redux/reducers';
-import axios from 'axios'
 
 import Todo from './todo/todo';
 import './styles.css';

@@ -35,24 +35,25 @@ class Login extends Component{
                 <br/>
                 <input type="submit" value="Log In" className="btn btn-primary" />
             </form>
+            {this.props.error === 'Wrong email/password' ? 
+                <p>Wrong email/password</p> :
+                null
+            }
         </div>
     }
 
 }
 
-// const mapStateToProp = (state) => {
-//     console.log('MAPPING STATE TO PROPS');
-//     return { 
-//         username: state.username,
-//         password: state.password, 
-//     }
-// };
+const mapStateToProp = (state) => {
+    return { 
+        error: state.error
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
-    console.log('MAPPING DISPATCH TO PROPS');
     return { 
         loggingIn: (user) => dispatch(loggingIn(user))
     };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProp, mapDispatchToProps)(Login);

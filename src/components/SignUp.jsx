@@ -19,9 +19,6 @@ class SignUp extends Component{
     }
 
     handleChange=(event)=>{
-      console.log(event.target)
-      console.log(event.target.checked)
-      console.log(event.target.value)
       if (event.target.type === 'checkbox') {
         this.setState({
           [event.target.name]:event.target.checked
@@ -72,9 +69,19 @@ class SignUp extends Component{
                 <br/> 
                 <input type="submit" value="Create Account" className="btn btn-primary" />
             </form>
+            {this.props.error === 'Email is already in use' ? 
+                <p>Email is already in use</p> :
+                null
+            }
         </div>
     }
 
+}
+
+const mapStateToProps = state => {
+  return {
+    error: state.error
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -85,4 +92,4 @@ const mapDispatchToProps = (dispatch) => {
     };
   };
 
-  export default connect(null, mapDispatchToProps)(SignUp);
+  export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
