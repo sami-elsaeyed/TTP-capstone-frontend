@@ -1,41 +1,64 @@
 import { Component } from "react"
+import { connect } from 'react-redux';
+import { loggingIn } from '../redux/reducers';
 
 class Login extends Component{
     constructor(props){
         super(props)
         this.state={
-            username:"",
-            password:""
+            email: "",
+            password: ""
         }
     }
-    handleUser=(event)=>{
+    
+    handleChange = (event) => {
         this.setState({
-            username:event.target.value
+            [event.target.name]: event.target.value
         })
     }
-    handlePass=(event)=>{
-        this.setState({
-            password:event.target.value
-        })
-    }
-    onSubmit=(event)=>{
+
+    onSubmit = async (event) => {
         event.preventDefault();
         console.log(this.state)
+        await this.props.loggingIn(this.state); // Log in redux call.
+        // Redirect to homepage with pref props??
     }
     render(){
-        return <div style= {{marginTop: 100, marginLeft:300, marginRight:570}}>
+        return <div>
+        <div style= {{marginTop: 100, width:350}} className="jumbotron container">
+            <p style={{fontSize:20, fontFamily:"Sans-serif"}}>Login and get to your Widgets</p>
             <form onSubmit={this.onSubmit}>
-                <label > Username: </label>
-                <input type="text" onChange={this.handleUser} style={{float:'right'}}/>
+                <label > Email: </label>
+                <input name = 'email' type="email" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
                 <label >Password: </label>
-                <input type="password" onChange={this.handlePass} style={{float:'right'}}/>
+                <input name = 'password' type="password" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
                 <br/>
-                <input type="submit" value="Log In" className="btn btn-primary" />
             </form>
+            {this.props.error === 'Wrong email/password' ? 
+                <p>Wrong email/password</p> :
+                null
+            }
+        </div>      
+        <div style={{textAlign:"center"}}>        
+         <input type="submit" value="Log In" className="btn btn-primary" />
+        </div> 
         </div>
     }
 
 }
-export default Login
+
+const mapStateToProp = (state) => {
+    return { 
+        error: state.error
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return { 
+        loggingIn: (user) => dispatch(loggingIn(user))
+    };
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(Login);

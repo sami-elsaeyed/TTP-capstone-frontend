@@ -1,63 +1,102 @@
 import { Component } from "react";
-import { Route } from "react-router-dom";
+import { connect } from 'react-redux';
+import { createAccountThunk } from "../redux/reducers/index";
 
 class SignUp extends Component{
     constructor(props){
         super(props)
         this.state={
-            username:"",
+            firstName:"",
             email:"",
             password:"",
-            repassword:""
-
+            repassword:"",
+            clock:true,
+            toDo:true,
+            weather:false,
+            news:false,
+            covid:false
         }
     }
-    handleUser=(event)=>{
+
+    handleChange=(event)=>{
+      if (event.target.type === 'checkbox') {
         this.setState({
-            username:event.target.value
-        })
-    }
-    handlePass=(event)=>{
+          [event.target.name]:event.target.checked
+       })
+      }
+      else{
         this.setState({
-            password:event.target.value
+           [event.target.name]:event.target.value
         })
+      }
     }
-    handleRepass=(event)=>{
-        this.setState({
-            repassword:event.target.value
-        })
-    }
-    handleEmail=(event)=>{
-        this.setState({
-            email:event.target.value
-        })
-    }
+    
     onSubmit=(event)=>{
-        event.preventDefault();
+      event.preventDefault();
+      console.log(this.state)
+      console.log(this.props.users)
+      this.props.createAccount(this.state)
         
     }
     render(){
-        return <div style= {{marginTop: 100, marginLeft:300, marginRight:500}}>
+        return <div>
+            <div style= {{marginTop: 100, width:390}} className="jumbotron container">
+            <p style={{fontSize:22, fontFamily:"Sans-serif"}}>Create an account to get started!</p>
             <form onSubmit={this.onSubmit}>
                 <label > Username: </label>
-                <input type="text" onChange={this.handleUser} style={{float:'right'}}/>
+                <input type="text" name="firstName" onChange={this.handleChange} style={{float:"right"}}/>
                 <br/>
                 <label >Password: </label>
-                <input type="password" onChange={this.handlePass} style={{float:'right'}}/>
+                <input type="password" name="password" onChange={this.handleChange} style={{float:"right"}}/>
                 <br/>
                 <label >Re-Enter Password: </label>
-                <input type="password" onChange={this.handleRepass} style={{float:'right'}}/>
+                <input type="password" name="repassword" onChange={this.handleChange} style={{float:"right"}}/>
                 <br/> 
                 <label >Email: </label>
-                <input type="text" onChange={this.handleEmail} style={{float:'right'}} />
+                <input type="text" name="email" onChange={this.handleChange} style={{float:"right"}} />
+                <br/> 
                 <br/>
-                <br/>
-                <input type="submit" value="Create Account" className="btn btn-primary" style={{margin:'auto'}}/>
+                <label style={{fontSize:22, fontFamily:"Sans-serif"}}>Set user Preferences</label>
+                <br />
+                <label style={{paddingRight:5}} >Clock</label>
+                <input type = 'checkbox' name="clock" onChange={this.handleChange} checked/>
+                {/* <br/>  */}
+                <label style={{paddingLeft:15, paddingRight:5}}>To Do List </label>
+                <input type = 'checkbox' name="todo" onChange={this.handleChange} checked/>
+                {/* <br/>  */}
+                <label style={{paddingLeft:15, paddingRight:5}}>Weather </label>
+                <input type = 'checkbox' name="weather" onChange={this.handleChange} />
+                {/* <br/>  */}
+                <label style={{paddingLeft:15, paddingRight:5}} >News </label>
+                <input type = 'checkbox' name="news" onChange={this.handleChange} />
+                <br/> 
+                
             </form>
+            {this.props.error === 'Email is already in use' ? 
+                <p>Email is already in use</p> :
+                null
+            }
         </div>
+        <div style={{textAlign:"center"}}>
+        <input type="submit" value="Create Account" className="btn btn-primary" />
+        </div>
+    </div>
     }
 
 }
 
+const mapStateToProps = state => {
+  return {
+    error: state.error
+  }
+}
 
-export default SignUp
+const mapDispatchToProps = (dispatch) => {
+    return {
+      createAccount: (user) => {
+        dispatch(createAccountThunk(user));
+      }
+    };
+  };
+
+  export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
