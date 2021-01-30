@@ -34,16 +34,15 @@ class Login extends Component{
                 <label >Password: </label>
                 <input name = 'password' type="password" onChange={this.handleChange} style={{float:'right'}}/>
                 <br/>
+                <div style={{textAlign:"center"}}>        
+                  <input type="submit" value="Log In" className="btn btn-primary" />
+                </div> 
                 <br/>
             </form>
             {this.props.error === 'Wrong email/password' ? 
                 <p>Wrong email/password</p> :
                 null
             }
-        </div>      
-        <div style={{textAlign:"center"}}>        
-         <input type="submit" value="Log In" className="btn btn-primary" />
-        </div> 
         </div>
     }
 

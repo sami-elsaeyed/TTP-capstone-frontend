@@ -49,6 +49,7 @@ class Todo extends Component{
     render(){
          if(this.state.addNew){
          return(
+
             <div style= {{marginTop: 100, marginLeft:300, width:500}} className="jumbotron container">
             <form onSubmit={this.onSubmit}>
                 <label > Task: </label>
@@ -59,6 +60,7 @@ class Todo extends Component{
         </div>
          )}
          else{
+
         return <div> <div style={{marginTop: 100, width:700 }} class="jumbotron container" >
             <h4 style={{textAlign:"center"}}>Todo List</h4>
             <br/>
@@ -72,8 +74,7 @@ class Todo extends Component{
                 <li className="list-group">No tasks available</li>
                 }
             </ul>
-            <br/>
-            
+            <br/>  
         </div>
             <div style={{textAlign:"center"}}>
                 <button className="btn btn-primary" onClick={this.handleNew}>Add Todo Item</button>

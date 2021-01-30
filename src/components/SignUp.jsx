@@ -43,7 +43,7 @@ class SignUp extends Component{
             <div style= {{marginTop: 100, width:390}} className="jumbotron container">
             <p style={{fontSize:22, fontFamily:"Sans-serif"}}>Create an account to get started!</p>
             <form onSubmit={this.onSubmit}>
-                <label > Username: </label>
+                <label > First Name: </label>
                 <input type="text" name="firstName" onChange={this.handleChange} style={{float:"right"}}/>
                 <br/>
                 <label >Password: </label>
@@ -70,15 +70,15 @@ class SignUp extends Component{
                 <label style={{paddingLeft:15, paddingRight:5}} >News </label>
                 <input type = 'checkbox' name="news" onChange={this.handleChange} />
                 <br/> 
-                
+                <br/> 
+                <div style={{textAlign:"center"}}>
+                  <input type="submit" value="Create Account" className="btn btn-primary" />
+                </div>
             </form>
             {this.props.error === 'Email is already in use' ? 
                 <p>Email is already in use</p> :
                 null
             }
-        </div>
-        <div style={{textAlign:"center"}}>
-        <input type="submit" value="Create Account" className="btn btn-primary" />
         </div>
     </div>
     }
