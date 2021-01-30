@@ -20,7 +20,7 @@ class Login extends Component{
     onSubmit = async (event) => {
         event.preventDefault();
         console.log(this.state)
-        await this.props.loggingIn(); // Log in redux call.
+        await this.props.loggingIn(this.state); // Log in redux call.
         // Redirect to homepage with pref props??
     }
     render(){
@@ -51,7 +51,7 @@ class Login extends Component{
 const mapDispatchToProps = (dispatch) => {
     console.log('MAPPING DISPATCH TO PROPS');
     return { 
-        loggingIn: () => dispatch(loggingIn())
+        loggingIn: (user) => dispatch(loggingIn(user))
     };
 };
 

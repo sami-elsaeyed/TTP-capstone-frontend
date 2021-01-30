@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 
-import TodoItem from "./todoItem";
+import TodoItem from "./TodoItem";
 import { getTodoItems, addTodoItemThunk} from "../../redux/reducers/index";
 
 class Todo extends Component{

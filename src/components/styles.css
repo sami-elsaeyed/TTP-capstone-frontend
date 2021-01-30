@@ -1,0 +1,10 @@
+.hub {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border: 1px solid black;
+}
+
+.hub div{
+    flex: 1;
+}

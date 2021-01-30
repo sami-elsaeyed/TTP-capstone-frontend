@@ -1,11 +1,75 @@
 import axios from 'axios';
 
-import { GOT_USER_PREFS, LOG_IN, CREATE_ACCOUNT, LOG_OUT, GET_TODO_ITEMS, ADD_TODO_ITEM, DELETE_TODO_ITEM } from './actions';
+import { GOT_USER_PREFS, 
+        LOG_IN, 
+        CREATE_ACCOUNT, 
+        LOG_OUT,
+        GET_TODO_ITEMS, 
+        ADD_TODO_ITEM, 
+        DELETE_TODO_ITEM, 
+        GOT_WEATHER,
+        GOT_NEWS,
+        GOT_COVID,
+    } from './actions';
 
 const initState = {
     user: "",
-    Todo: []
+    Todo: [],
+    weather: "",
+    covid: "",
+    news: "",
 }
+
+const gotWeather = (payload) => ({
+    type: GOT_WEATHER,
+    payload
+})
+
+export const getWeather = () => {
+    console.log("Thunking - getting weather now");
+    return async (dispatch) => {
+        try{
+            console.log("Getting weather");
+            const weather = await axios.get("http://localhost:8080/api/info/weather")
+            console.log(weather.data);
+            dispatch(gotWeather(weather.data));
+        }catch (error) { console.error(error) };
+    };
+};
+
+const gotCovid = (payload) => ({
+    type: GOT_COVID,
+    payload
+})
+
+export const getCovid = () => {
+    console.log("Thunking - getting covid now");
+    return async (dispatch) => {
+        try{
+            console.log("Getting covid");
+            const covid = await axios.get("http://localhost:8080/api/info/covid")
+            console.log(covid.data);
+            dispatch(gotCovid(covid.data));
+        }catch (error) { console.error(error) };
+    };
+};
+
+const gotNews = (payload) => ({
+    type: GOT_NEWS,
+    payload
+})
+
+export const getNews = () => {
+    console.log("Thunking - getting news now");
+    return async (dispatch) => {
+        try{
+            console.log("Getting news");
+            const news = await axios.get("http://localhost:8080/api/info/news")
+            console.log(news.data);
+            dispatch(gotNews(news.data));
+        }catch (error) { console.error(error) };
+    };
+};
 
 const gotUserPrefs = (payload) => ({
     type: GOT_USER_PREFS,
@@ -29,15 +93,13 @@ const logIn = (payload) => ({
     payload
 })
 
-export const loggingIn = () => {
+export const loggingIn = (userInfo) => {
     console.log("Thunking - logging in now.");
     return async (dispatch) => {
         try {  
+            console.log(userInfo);
             //login with dummy data
-            const user = await axios.post('http://localhost:8080/auth/login', {
-                "email": "test@gmail.com",
-                "password": "test"
-            }, {withCredentials: true});
+            const user = await axios.post('http://localhost:8080/auth/login', userInfo, {withCredentials: true});
             console.log(user);
             dispatch(logIn(user.data));
         }catch (error) { console.log(error) };
@@ -61,7 +123,7 @@ export const createAccountThunk =(data)=>{
     const logout = () => {
         return {
             type: LOG_OUT,
-            payload: {}
+            payload: "",
         }
     }
     export const logoutThunk = () => dispatch => {
@@ -148,6 +210,18 @@ const rootReducer = (state = initState, action) => {
         case DELETE_TODO_ITEM:
             return {...state, 
                 Todo: state.Todo.filter(task => task.id != action.payload)
+            }
+        case GOT_WEATHER:
+            return {...state,
+                weather: action.payload
+            }  
+        case GOT_COVID:
+            return {...state,
+                covid: action.payload
+            }  
+        case GOT_NEWS:
+            return {...state,
+                news: action.payload
             }  
         default:
             return state;
