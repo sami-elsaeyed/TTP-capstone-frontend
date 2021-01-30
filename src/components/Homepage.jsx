@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getUserPrefs } from '../redux/reducers';
 
-import Todo from './Todo/Todo';
+import Todo from './todo/todo';
 import './styles.css';
 import Weather from './Weather';
 import News from './News';

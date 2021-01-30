@@ -9,7 +9,7 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import Homepage from "./components/Homepage";
 import LogOut from "./components/LogOut";
-import Todo from './components/Todo/Todo'
+import Todo from './components/todo/todo'
 
 class App extends Component {
   render(){
