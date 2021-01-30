@@ -16,6 +16,7 @@ class SignUp extends Component{
             news:false
         }
     }
+
     handleChange=(event)=>{
       console.log(event.target)
       console.log(event.target.checked)
@@ -31,6 +32,7 @@ class SignUp extends Component{
         })
       }
     }
+    
     onSubmit=(event)=>{
       event.preventDefault();
       console.log(this.state)
@@ -56,10 +58,10 @@ class SignUp extends Component{
                 <label>Set user Preferences</label>
                 <br />
                 <label >Clock</label>
-                <input type = 'checkbox' name="clock" onChange={this.handleChange} />
+                <input type = 'checkbox' name="clock" onChange={this.handleChange} checked/>
                 <br/> 
                 <label >To Do List </label>
-                <input type = 'checkbox' name="todo" onChange={this.handleChange} />
+                <input type = 'checkbox' name="todo" onChange={this.handleChange} checked/>
                 <br/> 
                 <label >Weather </label>
                 <input type = 'checkbox' name="weather" onChange={this.handleChange} />
@@ -73,13 +75,7 @@ class SignUp extends Component{
     }
 
 }
-const mapStateToProps = (state) => {
-    console.log('state', state);
-    return {
-      users: state
-    };
-  };
-  
+
 const mapDispatchToProps = (dispatch) => {
     return {
       createAccount: (user) => {
@@ -88,5 +84,4 @@ const mapDispatchToProps = (dispatch) => {
     };
   };
 
-  export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
-
+  export default connect(null, mapDispatchToProps)(SignUp);
