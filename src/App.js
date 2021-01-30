@@ -10,6 +10,7 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import Homepage from "./components/Homepage";
 import LogOut from "./components/LogOut";
+import LandingPage from './components/LandingPage';
 
 class App extends Component {
   render(){
@@ -48,6 +49,7 @@ class App extends Component {
           <Route path ="/signUp" component={SignUp}/>
           <Route path ="/homepage" component={Homepage}/>
           <Route path ="/logOut" component={LogOut}/>
+          <Route exact path = '/' component = {LandingPage} />
         </div>
         </Router>
     )
