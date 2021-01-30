@@ -10,7 +10,8 @@ import { GOT_USER_PREFS,
         GOT_WEATHER,
         GOT_NEWS,
         GOT_COVID,
-        EDIT_PREFERENCES
+        EDIT_PREFERENCES,
+        CAUGHT_ERROR
     } from './actions';
 
 const initState = {
@@ -18,7 +19,8 @@ const initState = {
     Todo: [],
     weather: "",
     covid: "",
-    news: ""
+    news: "",
+    error: ''
 }
 
 const gotWeather = (payload) => ({
@@ -103,6 +105,11 @@ export const getUserPrefs = () => {
     };
 };
 
+const caughtError = payload => ({
+    type:CAUGHT_ERROR,
+    payload
+})
+
 const logIn = (payload) => ({
     type: LOG_IN,
     payload
@@ -116,7 +123,10 @@ export const loggingIn = (userInfo) => {
             const user = await axios.post('http://localhost:8080/auth/login', userInfo, {withCredentials: true});
             console.log(user);
             dispatch(logIn(user.data));
-        }catch (error) { console.log(error) };
+        }
+        catch (error) { 
+            return dispatch(caughtError(error.response.data))
+        };
     }
 }
 export const createAccount =(data)=>({
@@ -130,7 +140,11 @@ export const createAccountThunk =(data)=>{
         return axios.post('http://localhost:8080/auth/signup', data, {withCredentials: true})
           .then(res => {
             console.log('data', res.data)  
-            return dispatch(createAccount(res.data) )})
+            return dispatch(createAccount(res.data) )
+        })
+        .catch(error => {
+            return dispatch(caughtError(error.response.data))
+        })
       }
     }
 
@@ -239,6 +253,8 @@ const rootReducer = (state = initState, action) => {
             }  
         case EDIT_PREFERENCES:
             return {...state} 
+        case CAUGHT_ERROR: 
+            return {...state, error: action.payload}
         default:
             return state;
     }
