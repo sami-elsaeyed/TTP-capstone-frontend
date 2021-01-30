@@ -17,7 +17,7 @@ class App extends Component {
      <Router>
         <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link to="/" className="navbar-brand">Widget App</Link>
+            <Link to="/" className="navbar-brand">WidgetHub</Link>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 {!this.props.user? 
