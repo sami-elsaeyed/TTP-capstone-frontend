@@ -80,12 +80,12 @@ class Homepage extends Component{
                 </form> 
                 : null
              }
-             
+
              <br/>
              <div className="hub">
                  {this.displayPrefs()}
-             </div>
-            </>
+             </div> 
+             </>
         )
     }
 }

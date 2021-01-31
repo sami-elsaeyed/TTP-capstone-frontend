@@ -33,7 +33,7 @@ export const getWeather = () => {
     return async (dispatch) => {
         try{
             console.log("Getting weather");
-            const weather = await axios.get("http://localhost:8080/api/info/weather")
+            const weather = await axios.get("https://ttp-capstone-widgethub.herokuapp.com/api/info/weather")
             dispatch(gotWeather(weather.data));
         }catch (error) { console.error(error) };
     };
@@ -49,7 +49,7 @@ export const getCovid = () => {
     return async (dispatch) => {
         try{
             console.log("Getting covid");
-            const covid = await axios.get("http://localhost:8080/api/info/covid")
+            const covid = await axios.get("https://ttp-capstone-widgethub.herokuapp.com/api/info/covid")
             dispatch(gotCovid(covid.data));
         }catch (error) { console.error(error) };
     };
@@ -65,7 +65,7 @@ export const getNews = () => {
     return async (dispatch) => {
         try{
             console.log("Getting news");
-            const news = await axios.get("http://localhost:8080/api/info/news")
+            const news = await axios.get("https://ttp-capstone-widgethub.herokuapp.com/api/info/news")
             dispatch(gotNews(news.data));
         }catch (error) { console.error(error) };
     };
@@ -76,7 +76,7 @@ export const editPreferencesThunk = (newPrefs) => {
     return async (dispatch) => {
         try {
             console.log("We are getting user prefs now.");
-            const user = await axios.put(`http://localhost:8080/api/preferences/${newPrefs.id}`, newPrefs)
+            const user = await axios.put(`https://ttp-capstone-widgethub.herokuapp.com/api/preferences/${newPrefs.id}`, newPrefs)
             dispatch(editPreferences(user.data));
         }catch (error) { console.log(error) };
     };
@@ -98,7 +98,7 @@ export const getUserPrefs = () => {
     return async (dispatch) => {
         try {
             console.log("We are getting user prefs now.");
-            const user = await axios.get("http://localhost:8080/auth/me", {withCredentials: true})
+            const user = await axios.get("https://ttp-capstone-widgethub.herokuapp.com/auth/me", {withCredentials: true})
             console.log(user.data);
             dispatch(gotUserPrefs(user.data));
         }catch (error) { console.log(error) };
@@ -120,7 +120,7 @@ export const loggingIn = (userInfo) => {
     return async (dispatch) => {
         try {  
             console.log(userInfo);
-            const user = await axios.post('http://localhost:8080/auth/login', userInfo, {withCredentials: true});
+            const user = await axios.post('https://ttp-capstone-widgethub.herokuapp.com/auth/login', userInfo, {withCredentials: true});
             console.log(user);
             dispatch(logIn(user.data));
         }
@@ -137,7 +137,7 @@ export const createAccountThunk =(data)=>{
     console.log("Signing you up")
     console.log(data)
     return (dispatch) => {
-        return axios.post('http://localhost:8080/auth/signup', data, {withCredentials: true})
+        return axios.post('https://ttp-capstone-widgethub.herokuapp.com/auth/signup', data, {withCredentials: true})
           .then(res => {
             console.log('data', res.data)  
             return dispatch(createAccount(res.data) )
@@ -155,7 +155,7 @@ export const createAccountThunk =(data)=>{
         }
     }
     export const logoutThunk = () => dispatch => {
-        axios.delete('http://localhost:8080/auth/logout', {withCredentials: true})
+        axios.delete('https://ttp-capstone-widgethub.herokuapp.com/auth/logout', {withCredentials: true})
         .then(data => {
             console.log("Test");
             console.log(data);
@@ -186,7 +186,7 @@ export const createAccountThunk =(data)=>{
         console.log("Adding Item")
         console.log(data)
         return (dispatch) => {
-            return axios.post('http://localhost:8080/api/tasks', data)
+            return axios.post('https://ttp-capstone-widgethub.herokuapp.com/api/tasks', data)
               .then(res => {
                 console.log('data', res.data)  
                 return dispatch(addTodoItem(res.data) )})
@@ -199,7 +199,7 @@ export const createAccountThunk =(data)=>{
     })
     export const deleteTaskThunk=(id)=>{
         return (dispatch) => {
-            return axios.delete(`http://localhost:8080/api/tasks/${id}`)
+            return axios.delete(`https://ttp-capstone-widgethub.herokuapp.com/api/tasks/${id}`)
               .then(() => {
                 dispatch( deleteTask (id))
               })
