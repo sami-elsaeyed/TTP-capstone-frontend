@@ -23,54 +23,6 @@ const initState = {
     error: ''
 }
 
-const gotWeather = (payload) => ({
-    type: GOT_WEATHER,
-    payload
-})
-
-export const getWeather = () => {
-    console.log("Thunking - getting weather now");
-    return async (dispatch) => {
-        try{
-            console.log("Getting weather");
-            const weather = await axios.get("https://ttp-capstone-widgethub.herokuapp.com/api/info/weather")
-            dispatch(gotWeather(weather.data));
-        }catch (error) { console.error(error) };
-    };
-};
-
-const gotCovid = (payload) => ({
-    type: GOT_COVID,
-    payload
-})
-
-export const getCovid = () => {
-    console.log("Thunking - getting covid now");
-    return async (dispatch) => {
-        try{
-            console.log("Getting covid");
-            const covid = await axios.get("https://ttp-capstone-widgethub.herokuapp.com/api/info/covid")
-            dispatch(gotCovid(covid.data));
-        }catch (error) { console.error(error) };
-    };
-};
-
-const gotNews = (payload) => ({
-    type: GOT_NEWS,
-    payload
-})
-
-export const getNews = () => {
-    console.log("Thunking - getting news now");
-    return async (dispatch) => {
-        try{
-            console.log("Getting news");
-            const news = await axios.get("https://ttp-capstone-widgethub.herokuapp.com/api/info/news")
-            dispatch(gotNews(news.data));
-        }catch (error) { console.error(error) };
-    };
-};
-
 export const editPreferencesThunk = (newPrefs) => {
     console.log("Thunking - getting user prefs now.");
     return async (dispatch) => {
@@ -129,6 +81,7 @@ export const loggingIn = (userInfo) => {
         };
     }
 }
+
 export const createAccount =(data)=>({
     type: CREATE_ACCOUNT,
     payload: data
@@ -193,18 +146,67 @@ export const createAccountThunk =(data)=>{
           }
     }
 
-    export const deleteTask =(payload)=>({
-        type: DELETE_TODO_ITEM,
-        payload,
-    })
-    export const deleteTaskThunk=(id)=>{
-        return (dispatch) => {
-            return axios.delete(`https://ttp-capstone-widgethub.herokuapp.com/api/tasks/${id}`)
-              .then(() => {
+export const deleteTask =(payload)=>({
+    type: DELETE_TODO_ITEM,
+    payload,
+})
+
+export const deleteTaskThunk=(id)=>{
+    return (dispatch) => {
+        return axios.delete(`https://ttp-capstone-widgethub.herokuapp.com/api/tasks/${id}`)
+            .then(() => {
                 dispatch( deleteTask (id))
-              })
-          };
-        }    
+            })
+    };
+ }    
+
+const gotWeather = (payload) => ({
+    type: GOT_WEATHER,
+    payload
+})
+
+export const getWeather = () => {
+    console.log("Thunking - getting weather now");
+    return async (dispatch) => {
+        try{
+            console.log("Getting weather");
+            const weather = await axios.get("https://ttp-capstone-widgethub.herokuapp.com/api/info/weather")
+            dispatch(gotWeather(weather.data));
+        }catch (error) { console.error(error) };
+    };
+};
+
+const gotCovid = (payload) => ({
+    type: GOT_COVID,
+    payload
+})
+
+export const getCovid = () => {
+    console.log("Thunking - getting covid now");
+    return async (dispatch) => {
+        try{
+            console.log("Getting covid");
+            const covid = await axios.get("https://ttp-capstone-widgethub.herokuapp.com/api/info/covid")
+            dispatch(gotCovid(covid.data));
+        }catch (error) { console.error(error) };
+    };
+};
+
+const gotNews = (payload) => ({
+    type: GOT_NEWS,
+    payload
+})
+
+export const getNews = () => {
+    console.log("Thunking - getting news now");
+    return async (dispatch) => {
+        try{
+            console.log("Getting news");
+            const news = await axios.get("https://ttp-capstone-widgethub.herokuapp.com/api/info/news")
+            dispatch(gotNews(news.data));
+        }catch (error) { console.error(error) };
+    };
+};
 
 const rootReducer = (state = initState, action) => {
     console.log("REDUCER IS PROCESSING DISPATCHED ACTION");
@@ -213,7 +215,6 @@ const rootReducer = (state = initState, action) => {
     switch (action.type) {
       case GOT_USER_PREFS:
         return { ...state, 
-            user: action.payload 
              };
         case LOG_IN:
             return { ...state, 
