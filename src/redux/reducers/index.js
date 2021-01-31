@@ -215,6 +215,7 @@ const rootReducer = (state = initState, action) => {
     switch (action.type) {
       case GOT_USER_PREFS:
         return { ...state, 
+            user: action.payload
              };
         case LOG_IN:
             return { ...state, 
