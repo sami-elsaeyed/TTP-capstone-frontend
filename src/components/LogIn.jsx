@@ -1,5 +1,6 @@
 import { Component } from "react"
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import { loggingIn } from '../redux/reducers';
 
 class Login extends Component{
@@ -43,6 +44,7 @@ class Login extends Component{
                 <p className='text-danger'>Wrong email/password</p> :
                 null
             }
+            {this.props.user ? <Redirect to = '/homepage' />: null}
         </div>
         </div>
     }
@@ -51,7 +53,8 @@ class Login extends Component{
 
 const mapStateToProp = (state) => {
     return { 
-        error: state.error
+        error: state.error,
+        user: state.user
     }
 };
 
