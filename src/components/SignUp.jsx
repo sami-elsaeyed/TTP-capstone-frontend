@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { connect } from 'react-redux';
 import { createAccountThunk } from "../redux/reducers/index";
+import { Redirect } from "react-router-dom";
 
 class SignUp extends Component{
     constructor(props){
@@ -78,6 +79,7 @@ class SignUp extends Component{
                 <p className='text-danger'>Email is already in use</p> :
                 null
             }
+            {this.props.user ? <Redirect to = '/homepage' />: null}
         </div>
     </div>
     }

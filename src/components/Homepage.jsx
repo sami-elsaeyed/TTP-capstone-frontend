@@ -14,11 +14,11 @@ class Homepage extends Component{
         super(props);
         this.state = {
             editing: false,
-            clock:this.props.user.preference.clock,
-            toDoList:this.props.user.preference.toDoList,
-            weather:this.props.user.preference.weather,
-            news:this.props.user.preference.news,
-            covid:this.props.user.preference.covid,
+            clock: this.props.user ? this.props.user.preference.clock : null,
+            toDoList: this.props.user ? this.props.user.preference.toDoList : null,
+            weather: this.props.user ? this.props.user.preference.weather : null,
+            news:this.props.user ? this.props.user.preference.news : null,
+            covid: this.props.user ? this.props.user.preference.covid : null,
             id: null
         }
     }
@@ -56,6 +56,7 @@ class Homepage extends Component{
 
     render() {
         return(
+            this.props.user ?
             <>
              <h1> Welcome, {this.props.user.firstName} </h1>
              <button onClick={() => this.setState({ editing: true,  id: this.props.user.preference.id})}>Edit Hub</button>
@@ -86,6 +87,8 @@ class Homepage extends Component{
                  {this.displayPrefs()}
              </div> 
              </>
+             :
+             <p>loading</p>
         )
     }
 }

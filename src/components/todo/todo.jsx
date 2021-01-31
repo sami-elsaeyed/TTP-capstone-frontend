@@ -61,7 +61,7 @@ class Todo extends Component{
          )}
          else{
 
-        return <div> <div style={{marginTop: 100, width:700 }} class="jumbotron container" >
+        return <div> <div style={{marginTop: 100, width:700 }} className="jumbotron container" >
             <h4 style={{textAlign:"center"}}>Todo List</h4>
             <br/>
             <ul className="list-group">
