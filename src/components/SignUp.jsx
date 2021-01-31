@@ -41,7 +41,7 @@ class SignUp extends Component{
     }
     render(){
         return <div>
-            <div style= {{marginTop: 100, width:390}} className="jumbotron container">
+            <div style= {{marginTop: 100, width:500}} className="jumbotron container">
             <p style={{fontSize:22, fontFamily:"Sans-serif"}}>Create an account to get started!</p>
             <form onSubmit={this.onSubmit}>
                 <label > First Name: </label>
@@ -67,7 +67,7 @@ class SignUp extends Component{
                 {/* <br/>  */}
                 <label style={{paddingLeft:15, paddingRight:5}} >News </label>
                 <input type = 'checkbox' name="news" onChange={this.handleChange} />
-                <label style={{paddingRight:5}} >Covid Stats </label>
+                <label style={{paddingLeft:15, paddingRight:5}} >Covid Stats </label>
                 <input type = 'checkbox' name="covid" onChange={this.handleChange} />
                 <br/> 
                 <br/> 
