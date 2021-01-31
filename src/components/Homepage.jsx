@@ -14,11 +14,11 @@ class Homepage extends Component{
         super(props);
         this.state = {
             editing: false,
-            clock: this.props.user ? this.props.user.preference.clock : null,
-            toDoList: this.props.user ? this.props.user.preference.toDoList : null,
-            weather: this.props.user ? this.props.user.preference.weather : null,
-            news:this.props.user ? this.props.user.preference.news : null,
-            covid: this.props.user ? this.props.user.preference.covid : null,
+            clock: false,
+            toDoList: false,
+            weather: false,
+            news:false,
+            covid: false,
             id: null
         }
     }
@@ -54,13 +54,24 @@ class Homepage extends Component{
         console.log(this.state)
         this.setState({editing: false})
     }
+    handleEdit = () => {
+        this.setState({
+            editing: true,  
+            id: this.props.user.preference.id,
+            clock: this.props.user.clock,
+            toDoList: this.props.user.toDoList,
+            weather: this.props.user.weather,
+            news:this.props.user.news,
+            covid: this.props.user.covid,
+        })
+    }
 
     render() {
         return(
             this.props.user ?
             <>
              <h1> Welcome, {this.props.user.firstName} </h1>
-             <button onClick={() => this.setState({ editing: true,  id: this.props.user.preference.id})}>Edit Hub</button>
+             <button onClick={this.handleEdit}>Edit Hub</button>
              { this.state.editing ?  
                 <form id="editPref" onSubmit = {this.handleSubmit}>
                     <label >Clock</label>
@@ -90,7 +101,10 @@ class Homepage extends Component{
              </div> 
              </>
              :
-             <p>loading</p>
+             <p>loading <br />
+                bug note: cookies are blocked on some browsers, so retrieving or logging in a user does not go through,<br />
+                blocked on chrome and edge, works on firefox, need to find a fix
+             </p>
         )
     }
 }

@@ -14,7 +14,7 @@ class Weather extends Component {
         const { feels_like, humidity, temp } = (this.props.weather.main !== undefined ? this.props.weather.main : "Loading");
         // const { description } = (this.props.weather.weather !== undefined ? this.props.weather.weather[0] : "Loading forecast");
         return (
-            <>
+            <div className = 'weather'>
                 <h1>Weather</h1>
                 <h2>{name}</h2>
                 Windspeed: {speed} mph <br/>
@@ -23,7 +23,7 @@ class Weather extends Component {
                 Feels Like: {feels_like}F <br/> 
                 Humidity: {humidity}% <br/>
                 <br/>
-            </>
+            </div>
         )
     }
 
