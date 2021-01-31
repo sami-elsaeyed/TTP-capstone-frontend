@@ -23,7 +23,6 @@ class Homepage extends Component{
         }
     }
 
-
     async componentDidMount(){
         console.log("Homepage mounted.");
         await this.props.getUserPrefs();
@@ -31,6 +30,7 @@ class Homepage extends Component{
 
     displayPrefs = () => {
         let divArray = []
+        
         if (this.props.user.preference.clock === true)
             divArray.push(<div > <Clock /> </div>)
         if (this.props.user.preference.covid === true)
@@ -41,6 +41,7 @@ class Homepage extends Component{
             divArray.push(<div > <Todo /> </div>)
         if (this.props.user.preference.news === true)
             divArray.push(<div > <News /> </div>)
+    
         return divArray;
     }
 
@@ -83,7 +84,8 @@ class Homepage extends Component{
 
              <br/>
              <div className="hub">
-                 {this.displayPrefs()}
+                 {this.displayPrefs()
+                 }
              </div> 
              </>
         )
