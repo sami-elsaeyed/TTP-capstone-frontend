@@ -8,3 +8,25 @@
 .hub div{
     flex: 1;
 }
+.news div{
+    display: grid;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #007bff;
+    overflow: hidden;
+    width:500px;
+    height:fit-content;
+    margin: auto;
+    
+}
+.headNews {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid #007bff; 
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+ } 
+ 
+ .headNews span{ 
+     background:#fff; 
+     padding:0 10px; 
+ }

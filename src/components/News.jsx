@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { getNews } from '../redux/reducers';
+import  './styles.css';
+
 
 class News extends Component {
     async componentDidMount(){
@@ -11,24 +13,34 @@ class News extends Component {
     render(){
         return (
             <>
-            <h1>News</h1>
-                {
-                this.props.news.data !== undefined ? this.props.news.data.map((entry) => (
+            <div className="container">
+            <div class="news" >
+                 <div class="fp-item">
+                     <h4 class="headNews" ><span >NEWS</span></h4>
+                    {(this.props.news.data !== undefined) ? this.props.news.data.map((entry) => (
                     <>
-                    Title: {entry.title} <br/>
+                    <a href="{entry.url}" style={{fontSize: 22, fontFamily:"sans-serif"}}>Title: {entry.title} <br/></a>
+                    <caption style={{fontSize:15}} >
                     Author: {entry.author} <br/>   
                     Category: {entry.category} <br/>
                     Published: {entry.published} <br/>             
                     Source: {entry.source} <br/>
-                    URL: {entry.url} <br/>
+                   
                     <br/>
+                    </caption>
+                    <hr style={{color:"#007bff",backgroundColor: "#007bff" ,height:5}}/>
                     </>
+                ))
+                 : <> 
+                 Loading News..
+                 </>
+                } 
+                 </div>
 
-                                        )) : <h1>Loading News</h1>
-                
-                
-                
-                }  
+            </div>
+            
+
+                 </div>
             </>
         )
     }
