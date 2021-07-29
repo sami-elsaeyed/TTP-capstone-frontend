@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { getCovid } from '../redux/reducers';
+import './styles.css'
 
 class Covid extends Component {
     async componentDidMount(){
@@ -11,6 +12,7 @@ class Covid extends Component {
     render(){
         const { dailyNegative, dailyPositive, dailyTests } = (this.props.covid !== undefined ? this.props.covid : "Loading covid numbers")
         return (
+
             <>
             <div style={{marginTop:50,marginBottom:50}}className="covid">
             <h1>COVID STATS</h1>
@@ -22,6 +24,7 @@ class Covid extends Component {
                 <span>{ dailyTests }</span>
             </div>
             </>
+
         )
     }
 

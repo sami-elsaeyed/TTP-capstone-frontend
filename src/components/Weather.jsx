@@ -16,6 +16,8 @@ class Weather extends Component {
         return (
             <>
             <div className="weather container ">
+
+
                 <h2>{name}</h2>
                 <h1>{temp}<sup className="fahrenheit">F</sup></h1>
                 <p className="feel">Feels Like: {feels_like}<sup>F</sup></p>       
@@ -24,7 +26,9 @@ class Weather extends Component {
                 {/* Description: {description.split(" ").map((word) => word.charAt(0).toUpperCase(0) + word.slice(1)).join(" ") } <br/>   */}      
                 <br/>
             </div>
+
             </>
+
         )
     }
 
