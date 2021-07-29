@@ -14,16 +14,21 @@ class Weather extends Component {
         const { feels_like, humidity, temp } = (this.props.weather.main !== undefined ? this.props.weather.main : "Loading");
         // const { description } = (this.props.weather.weather !== undefined ? this.props.weather.weather[0] : "Loading forecast");
         return (
-            <div className = 'weather'>
-                <h1>Weather</h1>
+            <>
+            <div className="weather container ">
+
+
                 <h2>{name}</h2>
-                Windspeed: {speed} mph <br/>
-                {/* Description: {description.split(" ").map((word) => word.charAt(0).toUpperCase(0) + word.slice(1)).join(" ") } <br/>   */}
-                Temperature: {temp}F <br/>
-                Feels Like: {feels_like}F <br/> 
-                Humidity: {humidity}% <br/>
+                <h1>{temp}<sup className="fahrenheit">F</sup></h1>
+                <p className="feel">Feels Like: {feels_like}<sup>F</sup></p>       
+                <span className="info"> Windspeed: {speed} mph <br/>
+                Humidity: {humidity}%</span> <br/>
+                {/* Description: {description.split(" ").map((word) => word.charAt(0).toUpperCase(0) + word.slice(1)).join(" ") } <br/>   */}      
                 <br/>
             </div>
+
+            </>
+
         )
     }
 
