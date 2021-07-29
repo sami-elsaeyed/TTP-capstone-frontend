@@ -50,7 +50,7 @@ class Todo extends Component{
          if(this.state.addNew){
          return(
 
-            <div style= {{marginTop:100, width:300}} className="jumbotron container">
+            <div style= {{marginTop:50, width:300}} className="jumbotron container">
             <form onSubmit={this.onSubmit}>
                 <label > Task: </label>
                 <input type="text" name="task" onChange={this.handleChange}/>
@@ -63,7 +63,7 @@ class Todo extends Component{
          )}
          else{
 
-        return <div style={{marginTop: 100, width:700 }} class="jumbotron container" >
+        return <div style={{marginTop: 50, width:700 }} class="jumbotron container" >
             <h4 style={{textAlign:"center"}}>Todo List</h4>
             <br/>
             <ul className="list-group">

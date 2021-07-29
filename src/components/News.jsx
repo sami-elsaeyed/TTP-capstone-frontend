@@ -19,7 +19,7 @@ class News extends Component {
                      <h4 class="headNews" ><span >NEWS</span></h4>
                     {(this.props.news.data !== undefined) ? this.props.news.data.map((entry) => (
                     <>
-                    <a href="{entry.url}" style={{fontSize: 22, fontFamily:"sans-serif"}}>Title: {entry.title} <br/></a>
+                    <a href="{entry.url}" style={{fontSize: 22, fontFamily:"sans-serif"}}>{entry.title} <br/></a>
                     <caption style={{fontSize:15}} >
                     Author: {entry.author} <br/>   
                     Category: {entry.category} <br/>

@@ -12,12 +12,15 @@ class Covid extends Component {
         const { dailyNegative, dailyPositive, dailyTests } = (this.props.covid !== undefined ? this.props.covid : "Loading covid numbers")
         return (
             <>
-            <h1>Covid Numbers</h1>
-                <h6>Daily Negative:</h6>{ dailyNegative }
-                <h6>Daily Positive:</h6> { dailyPositive }
-                <h6>Daily Test:</h6> { dailyTests }
-                <br/>
-                <br/>
+            <div style={{marginTop:50,marginBottom:50}}className="covid">
+            <h1>COVID STATS</h1>
+                <h6>Daily Negative:</h6>
+                <h6>Daily Positive:</h6> 
+                <h6>Daily Test:</h6> 
+                <span>{ dailyNegative }</span>
+                <span style={{paddingRight:125}}>{ dailyPositive }</span>
+                <span>{ dailyTests }</span>
+            </div>
             </>
         )
     }

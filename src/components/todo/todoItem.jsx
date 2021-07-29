@@ -12,7 +12,7 @@ class TodoItem extends Component{
         return(
             <div className="">
                 <h5 maxLength="10" onChange={this.handleChange} style={{display: "inline-block"}}>{this.props.task.task}</h5>
-                <button className="btn btn-primary" onClick = {this.deleteTask} value = {this.props.task.id}>Remove Task</button>
+                <button className="btn btn-secondary btn-sm" onClick = {this.deleteTask} value = {this.props.task.id}>Remove Task</button>
             </div> 
         )
     }

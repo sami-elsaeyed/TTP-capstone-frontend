@@ -1,5 +1,6 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
+import './components/styles.css';
 
 import { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -17,24 +18,28 @@ class App extends Component {
    return (
      <Router>
         <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link to="/" className="navbar-brand">WidgetHub</Link>
-            <div className="collpase navbar-collapse">
-              <ul className="navbar-nav mr-auto">
+          <header className="head">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light head_custom-nav">
+            <Link to="/" className="navbar-brand ">WidgetHub</Link>
+            <div className="collapse navbar-collapse justify-content-end">
+              <ul className="navbar-nav">
                 {!this.props.user? 
                 <>
-                  <li>
+                  <li className="nav-item">
                     <Link to="/signUp" className="nav-link">Sign Up</Link>
                   </li>
-                  <li>
+                  <li className="nav-item">
                     <Link to="/logIn" className="nav-link">Log In</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/contact" className="nav-link text-primary">Contact Us</Link>
                   </li>
                 </> :
                 <>
-                  <li>
+                  <li className="nav-item">
                     <Link to="/logOut" className="nav-link">Log Out</Link>
                   </li>
-                  <li>
+                  <li className="nav-item">
                     <Link to="/homepage" className="nav-link">Homepage</Link>
                   </li>
                 </>
@@ -43,7 +48,7 @@ class App extends Component {
               </ul>
             </div>
           </nav>
-
+          </header>
 
           <Route path ="/logIn" component={LogIn}/>
           <Route path ="/signUp" component={SignUp}/>
